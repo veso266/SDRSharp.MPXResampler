@@ -126,6 +126,9 @@ namespace SDRSharp.MPXResampler
         {
             this.disbalanceLabel.Text = string.Format("Lost buffers {0:f0}", this._player.LostBuffers);
             this.bufferProgressBar.Value = this._player.BufferSize;
+
+            //Show user what internal sapmle rate we have
+            this.SampleRateLbl.Text = String.Format("Sample rate: {0} kHz", this._player.InternalSampleRate);
         }
 
         private void auxAudioEnableCheckBox_CheckedChanged(object sender, EventArgs e)
@@ -149,5 +152,14 @@ namespace SDRSharp.MPXResampler
         private ISharpControl _control;
         private AudioPlayer _player;
         private bool _playerIsStarted;
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            //if (this._player != null)
+                this._player.needsConfigure = true;
+
+            // Tell audio player what resample method we choose
+            this._player.isDecimationlerClass = radioButton2.Checked;
+        }
     }
 }
