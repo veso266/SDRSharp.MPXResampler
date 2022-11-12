@@ -2,7 +2,7 @@
 This is just a small demonstration plugin, which shows you how to transfer audio between SDR# and the soundcard and also shows you how to resample it (eather using a class or almost by hand)
  
 # How to install
-Download [dll](https://github.com/veso266/SDRSharp.MPXResampler/releases/download/1.0/SDRSharp.MPXResampler.dll) from release page
+Download [dll](https://github.com/veso266/SDRSharp.MPXResampler/releases/download/1.1/SDRSharp.MPXResampler.dll) from release page
 ## For latest SDR#
 You just copy dll into Plugins directory and enjoy
 ## For SDR# 1785 and below 
