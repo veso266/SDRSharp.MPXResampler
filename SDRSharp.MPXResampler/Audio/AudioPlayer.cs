@@ -57,11 +57,18 @@ namespace SDRSharp.MPXResampler
             }
         }
 
-        public bool needsConfigure
+        public bool needConfigure
         {
+            get
+            {
+                if (_audioProcessor != null)
+                    return _audioProcessor.needConfigure;
+                return false;
+            }
             set
             {
-                this._needsConfigure = value;
+                if (_audioProcessor != null)
+                    _audioProcessor.needConfigure = value;
             }
         }
 
@@ -80,7 +87,6 @@ namespace SDRSharp.MPXResampler
         private double _sampleRate;
         private int _inputLength;
         private bool _isDecimationlerClass;
-        private bool _needsConfigure;
 
         //Resapmler thinggy
         private FloatDecimator _channelDecimator;
@@ -179,7 +185,7 @@ namespace SDRSharp.MPXResampler
                 #endregion 
 
                 //Configure resampler
-                this._needsConfigure = true;
+                //this.needConfigure = true;
 
                 #region Init Audio player
                 if (this._wavePlayer != null)
@@ -206,6 +212,7 @@ namespace SDRSharp.MPXResampler
         /// <param name="length"></param>
         private unsafe void PlayerProcess(float* buffer, int length)
         {
+            /*
             if (this._audioStream == null)
             {
                 return;
@@ -220,9 +227,10 @@ namespace SDRSharp.MPXResampler
                 }
                 return;
             }
+            */
 
             //If audio players needs to reconfigure itself
-            if (_needsConfigure)
+            if (needConfigure)
             {
                 //Configure resampler
                 if (!this._isDecimationlerClass) //If we are using resampling class
@@ -241,11 +249,11 @@ namespace SDRSharp.MPXResampler
                     }
                 }
 
-                _needsConfigure = false;
+                needConfigure = false;
             }
 
             //Read the audiostream (samples) into InputBufferPtr (InputBufferPtr holds our audio direcly from SDR#)
-            this._audioStream.Read(this._InputBufferPtr, this._inputLength);
+            //this._audioStream.Read(this._InputBufferPtr, this._inputLength);
 
             //Resample to 48khz
             if (!this._isDecimationlerClass && this._resampler != null) //If we are using resampling class

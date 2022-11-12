@@ -26,8 +26,10 @@ namespace SDRSharp.MPXResampler
         public void Initialize(ISharpControl control)
         {
             this._control = control;
-            this._audioProcessor = new AudioProcessor();
+
+            this._audioProcessor = new AudioProcessor(this._control);
             this._control.RegisterStreamHook(this._audioProcessor, ProcessorType.FMMPX);
+
             this._guiControl = new MPXResamplerPanel(this._audioProcessor, this._control);
         }
 
