@@ -151,13 +151,10 @@ namespace SDRSharp.MPXResampler
 
 
                 #region Fill output buffer
-                //Utils.Memcpy(buffer, this._tempAudioBufferPtr, length * sizeof(float));
-
                 for (var i = 0; i < resampledLength; i++)
                 {
                     var sample = this._tempAudioBufferPtr[i];
                     buffer[i] = sample;
-                    buffer[i + 1] = sample;
                 }
 
                 #endregion
