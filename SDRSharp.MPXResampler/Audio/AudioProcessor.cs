@@ -151,7 +151,7 @@ namespace SDRSharp.MPXResampler
 
 
                 #region Fill output buffer
-                for (var i = 0; i < resampledLength; i++)
+                for (var i = 0; i < length; i++)
                 {
                     var sample = this._tempAudioBufferPtr[i];
                     buffer[i] = sample;
